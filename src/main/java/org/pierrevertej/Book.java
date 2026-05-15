@@ -2,16 +2,15 @@ package org.pierrevertej;
 
 public class Book extends Item {
     private String isbn;
-    private String title;
     private String author;
     private String genre;
 
     public Book(String isbn, String title, String author, String genre) {
         if (!isValidISBN(isbn)) {
+            throw new InvalidISBNException();
         }
-        super();
+        super(title);
         this.isbn = isbn;
-        this.title = title;
         this.author = author;
         this.genre = genre;
     }
