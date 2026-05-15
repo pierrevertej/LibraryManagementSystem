@@ -6,10 +6,10 @@ public class Book extends Item {
     private String author;
     private String genre;
 
-    public Book(String id, Status status, String isbn, String title, String author, String genre) {
+    public Book(String isbn, String title, String author, String genre) {
         if (!isValidISBN(isbn)) {
         }
-        super(id, status);
+        super();
         this.isbn = isbn;
         this.title = title;
         this.author = author;
