@@ -39,4 +39,9 @@ public class Student extends User {
     public boolean canBorrowItem(Item item) {
         return !borrowedItems.contains(item) && item.getStatus() == Item.Status.INSTORE && item instanceof Book && borrowedItems.size() < Constants.MAX_BOOKS_STUDENT;
     }
+
+    @Override
+    public String toString() {
+        return "S" + super.toString();
+    }
 }
