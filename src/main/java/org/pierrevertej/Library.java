@@ -59,7 +59,7 @@ public class Library {
                         }
                     }
                 }
-                if (elements[0] == "S") {
+                if (elements[0].equals("S")) {
                     User user = new Student(id, name, borrowedBooks);
                 } else {
                     User user = new Teacher(id, name, borrowedBooks);
@@ -82,12 +82,12 @@ public class Library {
                 String id = elements[1];
                 String title = elements[2];
                 Item.Status status = Item.Status.valueOf(elements[3]);
-                if (elements[0] == "B") {
+                if (elements[0].equals("B")) {
                     String isbn = elements[4];
                     String author = elements[5];
                     String genre = elements[6];
                     Item item = new Book(id, title, status, isbn, author, genre);
-                } else if (elements[0] == "D") {
+                } else if (elements[0].equals("D")) {
                     String director = elements[4];
                     double duration = Double.parseDouble(elements[5]);
                     Item item = new DVD(id, title, status, director, duration);
