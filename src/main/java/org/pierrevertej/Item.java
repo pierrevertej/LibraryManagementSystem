@@ -8,8 +8,7 @@ import lombok.Setter;
 @Getter
 public abstract class Item {
     protected String id;
-    @Setter
-    protected Status status;
+    @Setter protected Status status;
 
     @Setter private static int nextId = 1;
 
