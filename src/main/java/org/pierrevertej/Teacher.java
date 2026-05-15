@@ -1,9 +1,13 @@
 package org.pierrevertej;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import util.Constants;
 
 import java.util.List;
 
+@Getter
+@EqualsAndHashCode(callSuper = true)
 public class Teacher extends User {
     public Teacher(String name) {
         super(name);
@@ -54,7 +58,7 @@ public class Teacher extends User {
      */
     @Override
     public boolean canBorrowItem(Item item) {
-        return !borrowedItems.contains(item) && item.getStatus() == Item.Status.INSTORE && item instanceof Book && borrowedItems.size() < Constants.MAX_ITEMS_TEACHER;
+        return item.getStatus() == Item.Status.INSTORE &&  borrowedItems.size() < Constants.MAX_ITEMS_TEACHER;
     }
 
     @Override
