@@ -1,6 +1,7 @@
 package org.pierrevertej;
 
 import lombok.Getter;
+import lombok.Setter;
 import util.Constants;
 
 import java.io.File;
@@ -8,9 +9,9 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Library {
-    @Getter
+    @Getter @Setter
     private static List<Item> items = new ArrayList<>();
-    @Getter
+    @Getter @Setter
     private static List<User> users = new ArrayList<>();
 
     /**
@@ -171,9 +172,9 @@ public class Library {
      */
     public static List<Item> searchTitleRecursion(String title) {
         List<Item> copy = new ArrayList<>(items);
-        List<Item> answer = new ArrayList<>();
+        Set<Item> answer = new HashSet<>();
         helperTitle(copy, answer, title); // helper calls itself
-        return answer;
+        return new ArrayList<>(answer);
     }
     /**
      * search for items that contain a keyword in their author (no duplicates)
@@ -182,9 +183,9 @@ public class Library {
      */
     public static List<Item> searchAuthorRecursion(String author) {
         List<Item> copy = new ArrayList<>(items);
-        List<Item> answer = new ArrayList<>();
+        Set<Item> answer = new HashSet<>();
         helperAuthor(copy, answer, author); // recursion is because the helper calls itself
-        return answer;
+        return new ArrayList<>(answer);
     }
 
     /**
@@ -194,7 +195,7 @@ public class Library {
      * @param answer
      * @param title
      */
-    private static void helperTitle(List<Item> copy, List<Item> answer, String title){
+    private static void helperTitle(List<Item> copy, Set<Item> answer, String title){
         if (copy.isEmpty()) {return;}
         Item item = copy.get(0);
         copy.remove(0);
@@ -209,14 +210,14 @@ public class Library {
      * @param answer
      * @param title
      */
-    private static void helperAuthor(List<Item> copy, List<Item> answer, String author){
+    private static void helperAuthor(List<Item> copy, Set<Item> answer, String author){
         if (copy.isEmpty()) {return;}
         Item item = copy.getFirst();
         copy.removeFirst();
         if (item instanceof Book book && book.getAuthor().toLowerCase().contains(author.toLowerCase())) {answer.add(item);}
         else if (item instanceof DVD dvd && dvd.getDirector().toLowerCase().contains(author.toLowerCase())) {answer.add(item);}
         else if (item instanceof Magazine mag && mag.getPublisher().toLowerCase().contains(author.toLowerCase())) {answer.add(item);}
-        helperTitle(copy, answer, author);
+        helperAuthor(copy, answer, author);
     }
 
     /**

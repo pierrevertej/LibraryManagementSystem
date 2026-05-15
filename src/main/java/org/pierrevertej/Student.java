@@ -26,7 +26,7 @@ public class Student extends User {
             item.setStatus(Item.Status.BORROWED);
             return true;
         } else {
-            System.out.println("Can't borrow item!");
+            System.out.println("Can't borrow item");
             return false;
         }
     }
@@ -44,6 +44,7 @@ public class Student extends User {
             item.setStatus(Item.Status.INSTORE);
             return true;
         } else {
+            System.out.println("Can't return item");
             return false;
         }
     }
