@@ -31,6 +31,11 @@ public class Book extends Item {
         this.genre = genre;
     }
 
+    /**
+     * Checks if the ISBN number is valid (13 digits)
+     * @param isbn ISBN
+     * @return boolean which indicates the validity of the ISBN number
+     */
     public static boolean isValidISBN(String isbn) {
         return isbn.matches("\\d{13}"); // Must be 13 digits
     }

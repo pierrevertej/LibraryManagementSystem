@@ -8,7 +8,6 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
 @EqualsAndHashCode
 @Setter
 @Getter
@@ -23,6 +22,15 @@ public abstract class User {
         this.id = String.format("%04d", nextId++);
         this.name = name;
         borrowedItems = new ArrayList<>();
+        Library.addUser(this);
+    }
+
+    public User(String id, String name, List<Item> borrowedItems) {
+        this.id = id;
+        this.name = name;
+        this.borrowedItems = borrowedItems;
+        nextId++;
+        Library.addUser(this);
     }
 
     @Override
@@ -34,6 +42,7 @@ public abstract class User {
         return str;
     }
 
+    // documentation in each implementation of the abstract methods
     public abstract boolean borrowItem(Item item);
     public abstract boolean returnItem(Item item);
     public abstract boolean canBorrowItem(Item item);

@@ -14,11 +14,17 @@ import java.util.Map;
 @Getter
 public class Admin implements Reportable {
 
+    /**
+     * Backs up the items and users lists into the csv files
+     */
     public void backup() {
         backupItems();
         backupUsers();
     }
 
+    /**
+     * Puts the item data into the books.csv file
+     */
     private void backupItems() {
         List<Item> items = Library.getItems();
         StringBuilder sb = new StringBuilder();
@@ -34,6 +40,9 @@ public class Admin implements Reportable {
         }
     }
 
+    /**
+     * Puts the user data into the users.csv file
+     */
     private void backupUsers() {
         List<User> users = Library.getUsers();
         StringBuilder sb = new StringBuilder();
@@ -49,6 +58,9 @@ public class Admin implements Reportable {
         }
     }
 
+    /**
+     * Print information about every item of the library
+     */
     @Override
     public void generateReport() {
         Map<Item.Status, List<Item>> report = new HashMap<>();

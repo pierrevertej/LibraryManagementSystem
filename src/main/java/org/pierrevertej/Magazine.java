@@ -25,7 +25,7 @@ public class Magazine extends Item {
 
     @Override
     public String toString() {
-        return "D," + super.toString()
+        return "M," + super.toString()
                 + issueNumber + "," +
                 publisher;
     }

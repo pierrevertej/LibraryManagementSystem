@@ -13,6 +13,12 @@ public class Teacher extends User {
         super(id, name, borrowedItems);
     }
 
+    /**
+     * Borrows an item; adds it to the borrowed items and change the status to borrowed
+     * teacher needs to be able to borrow the item
+     * @param item
+     * @return boolean representing whether the operation was successful
+     */
     @Override
     public boolean borrowItem(Item item) {
         if (canBorrowItem(item)) {
@@ -24,6 +30,12 @@ public class Teacher extends User {
         }
     }
 
+    /**
+     * Returns an item; changes status to INSTORE and removes it from borrowed books
+     * Book needs to be in borrowed books and be borrowed
+     * @param item item that needs to be returned
+     * @return boolean representing whether the return was successful
+     */
     @Override
     public boolean returnItem(Item item) {
         if (borrowedItems.contains(item)) {
@@ -35,6 +47,11 @@ public class Teacher extends User {
         }
     }
 
+    /**
+     * Checks if the teacher can borrow this item (must have less than 10 borrowed items)
+     * @param item
+     * @return boolean showing if the item can be borrowed
+     */
     @Override
     public boolean canBorrowItem(Item item) {
         return !borrowedItems.contains(item) && item.getStatus() == Item.Status.INSTORE && item instanceof Book && borrowedItems.size() < Constants.MAX_ITEMS_TEACHER;

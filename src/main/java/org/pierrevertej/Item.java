@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import java.util.Objects;
 
-@AllArgsConstructor
 @Getter
 public abstract class Item {
     protected String id;
@@ -19,6 +18,15 @@ public abstract class Item {
         this.id = String.format("%04d", nextId++);
         this.title = title;
         this.status = Status.INSTORE;
+        Library.addItem(this);
+    }
+
+    public Item(String id, String title, Status status) {
+        this.id = id;
+        this.title = title;
+        this.status = status;
+        nextId++;
+        Library.addItem(this);
     }
 
     @Override

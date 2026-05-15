@@ -13,6 +13,12 @@ public class Student extends User {
         super(id, name, borrowedItems);
     }
 
+    /**
+     * Borrows an item; adds it to the borrowed items and change the status to borrowed
+     * students needs to be able to borrow the item
+     * @param item
+     * @return boolean representing whether the operation was successful
+     */
     @Override
     public boolean borrowItem(Item item) {
         if (canBorrowItem(item)) {
@@ -20,10 +26,17 @@ public class Student extends User {
             item.setStatus(Item.Status.BORROWED);
             return true;
         } else {
+            System.out.println("Can't borrow item!");
             return false;
         }
     }
 
+    /**
+     * Returns an item; changes status to INSTORE and removes it from borrowed books
+     * Book needs to be in borrowed books and be borrowed
+     * @param item item that needs to be returned
+     * @return boolean representing whether the return was successful
+     */
     @Override
     public boolean returnItem(Item item) {
         if (borrowedItems.contains(item)) {
@@ -35,9 +48,14 @@ public class Student extends User {
         }
     }
 
+    /**
+     * Checks if the student can borrow this item (must be a book and have less than 5 borrowed items)
+     * @param item
+     * @return boolean showing if the item can be borrowed
+     */
     @Override
     public boolean canBorrowItem(Item item) {
-        return !borrowedItems.contains(item) && item.getStatus() == Item.Status.INSTORE && item instanceof Book && borrowedItems.size() < Constants.MAX_BOOKS_STUDENT;
+        return item.getStatus() == Item.Status.INSTORE && item instanceof Book && borrowedItems.size() < Constants.MAX_BOOKS_STUDENT;
     }
 
     @Override
